@@ -8,6 +8,6 @@ jobs:
     steps:
      - uses: actions/checkout@v1
      - run: |
-        cat chopchop.yml | grep "uri:" | sort | uniq -c
+        cat chopchop.yml | grep "uri:" | sort | uniq -c | sort -n
         test=`cat chopchop.yml | grep "uri:" | sort | uniq -c | grep -v 1 | wc -l`
-        if [ $test != 0 ]; then exit 1; echo "There shouldn't be multiple (and identical) 'uri'. It should be refactored. "; fi
+        if [ $test != 0 ]; then echo "There shouldn't be multiple (and identical) 'uri'. It should be refactored. "; exit 1; fi
