@@ -1,0 +1,12 @@
+name: ChopChop YAML configuration Linter
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v1
+     - run: |
+        test=`cat chopchop.yml | grep "uri:" | sort | uniq -c | grep -v 1 | wc -l`
+        if [ $test != 0 ]; then exit 1; fi
